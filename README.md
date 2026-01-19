@@ -36,6 +36,8 @@ A production-ready .NET 9 ASP.NET Core Web API for a comprehensive car dealershi
 - Database id strategy is bad, this is known by me but I chose to do int to save time.
 - Controller logic should be abstracted more into services, but not enough time to do so, most processing is done in the controllers directly except for user management and otp.
 - Messy and ugly JWT configuration. Im new to .NET so security configuration was annoying.
+- Inappropriate KID and JWT Secret values, these are just placeholders. Rest assured I know how to generate appropriate ones
+- Commiting secrets, these are placeholders and meant for demo purposes only.
 
 ## Technology Stack
 - **.NET 9** - ASP.NET Core Web API
