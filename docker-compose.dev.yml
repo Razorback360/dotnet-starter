@@ -1,0 +1,26 @@
+version: '3.8'
+
+# Development override for docker-compose.yml
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  cardealer-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build
+    volumes:
+      # Mount source code for hot reload (if using dotnet watch)
+      - ./CarDealer.Api:/src/CarDealer.Api
+      - cardealer-data:/app/data
+      - cardealer-logs:/app/logs
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
+    command: dotnet watch run --project /src/CarDealer.Api/CarDealer.Api.csproj --no-restore
+    stdin_open: true
+    tty: true
+
+volumes:
+  cardealer-data:
+  cardealer-logs:

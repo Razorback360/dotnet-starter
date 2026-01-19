@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  cardealer-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cardealer-api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/cardealer.db
+      - Jwt__Secret=YourSuperSecretKeyWithAtLeast32Characters!
+      - Jwt__Issuer=CarDealerApi
+      - Jwt__Audience=CarDealerClient
+      - Jwt__ExpirationMinutes=60
+      - Otp__ExpirationMinutes=5
+      - Otp__CodeLength=6
+    volumes:
+      # Persist database and logs
+      - cardealer-data:/app/data
+      - cardealer-logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/swagger/index.html"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  cardealer-data:
+    driver: local
+  cardealer-logs:
+    driver: local
