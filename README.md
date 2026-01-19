@@ -4,23 +4,23 @@
 A production-ready .NET 9 ASP.NET Core Web API for a comprehensive car dealership management system featuring CRUD operations, role-based access control (Admin/Customer), JWT authentication, and OTP-protected sensitive actions. The system demonstrates security best practices including purpose-specific OTP validation, input sanitization with FluentValidation, structured logging with Serilog, and comprehensive error handling.
 
 ## Features
-✅ **Authentication & Authorization**
+**Authentication & Authorization**
 - JWT Bearer token authentication
 - Role-based authorization (Admin/Customer)
 - OTP verification for sensitive operations (Register, Login, Purchase Request, Update Vehicle)
 
-✅ **Admin Capabilities**
+**Admin Capabilities**
 - Add and update vehicles in inventory
 - View all registered customers
 - Process vehicle sales and purchase requests
 
-✅ **Customer Capabilities**
+**Customer Capabilities**
 - Browse vehicles with filtering options
 - View detailed vehicle information
 - Submit purchase requests
 - Track purchase history
 
-✅ **Security & Best Practices**
+**Security & Best Practices**
 - One-Time Password (OTP) protection with purpose-specific validation
 - Password hashing with PBKDF2
 - OTP expiration handling (5 minutes)
@@ -28,9 +28,14 @@ A production-ready .NET 9 ASP.NET Core Web API for a comprehensive car dealershi
 - Global error handling middleware
 - Structured logging with Serilog
 
-✅ **API Documentation**
+**API Documentation**
 - Swagger/OpenAPI documentation
 - JWT authentication integration in Swagger UI
+
+## Acknowledgements
+- Database id strategy is bad, this is known by me but I chose to do int to save time.
+- Controller logic should be abstracted more into services, but not enough time to do so, most processing is done in the controllers directly except for user management and otp.
+- Messy and ugly JWT configuration. Im new to .NET so security configuration was annoying.
 
 ## Technology Stack
 - **.NET 9** - ASP.NET Core Web API
@@ -488,11 +493,9 @@ CarDealer.Api/
 
 ## Additional Files
 
-- **swagger.json**: OpenAPI specification export
+- **swagger.json**: OpenAPI specification export (made with swagger)
 - **postman-collection.json**: Postman collection for testing
 - **CarDealer.Api.http**: HTTP request samples for Visual Studio
-- **IMPLEMENTATION.md**: Detailed implementation notes
-- **REQUIREMENTS.md**: Original project requirements
 
 ## Docker Architecture
 
@@ -504,7 +507,7 @@ CarDealer.Api/
 
 ## Requirements Coverage
 
-This implementation fulfills all requirements from [REQUIREMENTS.md](REQUIREMENTS.md):
+This implementation fulfills all requirements requested:
 
 ✅ **Core Requirements**
 - User Management (Register, Login)
@@ -529,24 +532,3 @@ This implementation fulfills all requirements from [REQUIREMENTS.md](REQUIREMENT
 - Logging implementation (Serilog)
 - Input sanitization (FluentValidation)
 - Docker containerization
-
-## Future Enhancements
-
-Potential improvements for production deployment:
-- Actual SMS/Email delivery for OTP
-- Redis caching for OTP storage
-- Rate limiting on authentication endpoints
-- Advanced search with pagination
-- File upload for vehicle images
-- Payment gateway integration
-- Real-time notifications
-- Audit logging
-- Multi-factor authentication options
-
-## License
-
-This project is a demonstration API built for educational purposes.
-
-## Support
-
-For issues or questions, refer to the implementation documentation in [IMPLEMENTATION.md](IMPLEMENTATION.md) or review the inline code comments.
